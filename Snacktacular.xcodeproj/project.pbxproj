@@ -16,6 +16,7 @@
 		8409A32129A81ED600A4DDCA /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 8409A32029A81ED600A4DDCA /* FirebaseFirestoreSwift */; };
 		8409A32329A81ED600A4DDCA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 8409A32229A81ED600A4DDCA /* FirebaseStorage */; };
 		8409A32529A81FA600A4DDCA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8409A32429A81FA600A4DDCA /* GoogleService-Info.plist */; };
+		8409A32729A8306B00A4DDCA /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409A32629A8306B00A4DDCA /* ListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		8409A31329A81C4F00A4DDCA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8409A31A29A81CC000A4DDCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8409A32429A81FA600A4DDCA /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
+		8409A32629A8306B00A4DDCA /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 				8409A31A29A81CC000A4DDCA /* Info.plist */,
 				8409A30C29A81C4E00A4DDCA /* SnacktacularApp.swift */,
 				8409A30E29A81C4E00A4DDCA /* LoginView.swift */,
+				8409A32629A8306B00A4DDCA /* ListView.swift */,
 				8409A31029A81C4F00A4DDCA /* Assets.xcassets */,
 				8409A32429A81FA600A4DDCA /* GoogleService-Info.plist */,
 				8409A31229A81C4F00A4DDCA /* Preview Content */,
@@ -162,6 +165,7 @@
 			files = (
 				8409A30F29A81C4E00A4DDCA /* LoginView.swift in Sources */,
 				8409A30D29A81C4E00A4DDCA /* SnacktacularApp.swift in Sources */,
+				8409A32729A8306B00A4DDCA /* ListView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
