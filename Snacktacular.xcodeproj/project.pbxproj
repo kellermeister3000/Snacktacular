@@ -17,6 +17,9 @@
 		8409A32329A81ED600A4DDCA /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 8409A32229A81ED600A4DDCA /* FirebaseStorage */; };
 		8409A32529A81FA600A4DDCA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8409A32429A81FA600A4DDCA /* GoogleService-Info.plist */; };
 		8409A32729A8306B00A4DDCA /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409A32629A8306B00A4DDCA /* ListView.swift */; };
+		8409A32929A83C0500A4DDCA /* Spot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409A32829A83C0500A4DDCA /* Spot.swift */; };
+		8409A32B29A83C8E00A4DDCA /* SpotDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409A32A29A83C8E00A4DDCA /* SpotDetailView.swift */; };
+		8409A32D29A83F7B00A4DDCA /* SpotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409A32C29A83F7B00A4DDCA /* SpotViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +31,9 @@
 		8409A31A29A81CC000A4DDCA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		8409A32429A81FA600A4DDCA /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		8409A32629A8306B00A4DDCA /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		8409A32829A83C0500A4DDCA /* Spot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spot.swift; sourceTree = "<group>"; };
+		8409A32A29A83C8E00A4DDCA /* SpotDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailView.swift; sourceTree = "<group>"; };
+		8409A32C29A83F7B00A4DDCA /* SpotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,8 +72,11 @@
 			children = (
 				8409A31A29A81CC000A4DDCA /* Info.plist */,
 				8409A30C29A81C4E00A4DDCA /* SnacktacularApp.swift */,
+				8409A32829A83C0500A4DDCA /* Spot.swift */,
+				8409A32C29A83F7B00A4DDCA /* SpotViewModel.swift */,
 				8409A30E29A81C4E00A4DDCA /* LoginView.swift */,
 				8409A32629A8306B00A4DDCA /* ListView.swift */,
+				8409A32A29A83C8E00A4DDCA /* SpotDetailView.swift */,
 				8409A31029A81C4F00A4DDCA /* Assets.xcassets */,
 				8409A32429A81FA600A4DDCA /* GoogleService-Info.plist */,
 				8409A31229A81C4F00A4DDCA /* Preview Content */,
@@ -163,9 +172,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8409A32B29A83C8E00A4DDCA /* SpotDetailView.swift in Sources */,
 				8409A30F29A81C4E00A4DDCA /* LoginView.swift in Sources */,
+				8409A32D29A83F7B00A4DDCA /* SpotViewModel.swift in Sources */,
 				8409A30D29A81C4E00A4DDCA /* SnacktacularApp.swift in Sources */,
 				8409A32729A8306B00A4DDCA /* ListView.swift in Sources */,
+				8409A32929A83C0500A4DDCA /* Spot.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
