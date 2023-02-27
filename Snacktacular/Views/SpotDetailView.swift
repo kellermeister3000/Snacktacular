@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import FirebaseFirestoreSwift
 
 struct SpotDetailView: View {
     struct Annotation: Identifiable {
@@ -18,12 +19,18 @@ struct SpotDetailView: View {
     
     @EnvironmentObject var spotVM: SpotViewModel
     @EnvironmentObject var locationManager: LocationManager
+    // The variable below does not have the right path. We will change this in .onAppear
+    @FirestoreQuery(collectionPath: "spots") var reviews: [Review]
     @State var spot: Spot
     @State private var showPlaceLookupSheet = false
+    @State private var showReviewViewSheet = false
+    @State private var showSaveAlert = false
+    @State private var showingAsSheet = false
     @State private var mapRegion = MKCoordinateRegion()
     @State private var annotations: [Annotation] = []
     @Environment(\.dismiss) private var dismiss
     let regionSize = 500.0 // meters
+    var previewRunning = false
     
     var body: some View {
         VStack {
@@ -44,14 +51,58 @@ struct SpotDetailView: View {
             Map(coordinateRegion: $mapRegion, showsUserLocation: true, annotationItems: annotations) { annotation in
                 MapMarker(coordinate: annotation.coordinate)
             }
+            .frame(height: 250)
             .onChange(of: spot) { _ in
                 annotations = [Annotation(name: spot.name, address: spot.address, coordinate: spot.coordinate)]
                 mapRegion.center = spot.coordinate
             }
             
+            List {
+                Section {
+                    ForEach(reviews) { review in
+                        NavigationLink {
+                            ReviewView(spot: spot, review: review)
+                        } label: {
+                            Text(review.title) //TODO: Build a custom cell showing stars, title, and body
+                        }
+                        
+                    }
+                } header: {
+                    HStack {
+                        Text("Avg. Rating:")
+                            .font(.title2)
+                            .bold()
+                        Text("4.5") //TODO: Change to a computed property
+                            .font(.title)
+                            .fontWeight(.black)
+                            .foregroundColor(Color("SnackColor"))
+                        Spacer()
+                        Button("Rate It") {
+                            if spot.id == nil {
+                                showSaveAlert.toggle()
+                            } else {
+                                showReviewViewSheet.toggle()
+                            }
+                        }
+                        .buttonStyle(.borderedProminent)
+                        .bold()
+                        .tint(Color("SnackColor"))
+                    }
+                }
+                .headerProminence(.increased)
+            }
+            .listStyle(.plain)
+            
             Spacer()
         }
         .onAppear{
+            if !previewRunning && spot.id != nil { //This is to prevent PreviewProvider error
+                $reviews.path = "spots/\(spot.id ?? "")/reviews"
+                print("reviews.path = \($reviews.path)")
+            } else { // spot.id starts out as nil
+                showingAsSheet = true
+            }
+            
             if spot.id != nil { // If we have a spot, center map on the spot
                 mapRegion = MKCoordinateRegion(center: spot.coordinate, latitudinalMeters: regionSize, longitudinalMeters: regionSize)
             } else { // otherwise center the map on the device location
@@ -64,40 +115,72 @@ struct SpotDetailView: View {
         .navigationBarTitleDisplayMode(.inline)
         .navigationBarBackButtonHidden(spot.id == nil)
         .toolbar {
-            if spot.id == nil { // New spot, so show Cancel/Save buttons
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("Cancel") {
-                        dismiss()
-                    }
-                }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button("Save") {
-                        Task {
-                            let success = await spotVM.saveSpot(spot: spot)
-                            if success {
-                                dismiss()
-                            } else {
-                                print("😡 DANG! Error saving spot!")
-                            }
+            if showingAsSheet { // New spot, so show Cancel / Save buttons
+                if spot.id == nil && showingAsSheet { // New spot, so show Cancel/Save buttons
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel") {
+                            dismiss()
                         }
-                        dismiss()
+                    }
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Button("Save") {
+                            Task {
+                                let success = await spotVM.saveSpot(spot: spot)
+                                if success {
+                                    dismiss()
+                                } else {
+                                    print("😡 DANG! Error saving spot!")
+                                }
+                            }
+                            dismiss()
+                        }
+                    }
+                    ToolbarItemGroup(placement: .bottomBar) {
+                        Spacer()
+                        
+                        Button {
+                            showPlaceLookupSheet.toggle()
+                        } label: {
+                            Image(systemName: "magnifyingglass")
+                            Text("Lookup Place")
+                        }
+                        
+                    }
+                } else if showingAsSheet && spot.id != nil {
+                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                        Button("Done") {
+                            dismiss()
+                        }
                     }
                 }
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Spacer()
-                    
-                    Button {
-                        showPlaceLookupSheet.toggle()
-                    } label: {
-                        Image(systemName: "magnifyingglass")
-                        Text("Lookup Place")
-                    }
-
-                }
+                
             }
         }
         .sheet(isPresented: $showPlaceLookupSheet) {
             PlaceLookupView(spot: $spot)
+        }
+        .sheet(isPresented: $showReviewViewSheet) {
+            NavigationStack {
+                ReviewView(spot: spot, review: Review())
+            }
+        }
+        .alert("Cannot Rate Place Unless It Is Saved", isPresented: $showSaveAlert) {
+            Button("Cancel", role: .cancel) {}
+            Button("Save", role: .none) {
+                Task {
+                    let success = await spotVM.saveSpot(spot: spot)
+                    spot = spotVM.spot
+                    if success {
+                        // If we didn't update the path after saving spot, we wouldn't be able to show new reviews when added
+                        $reviews.path = "spots/\(spot.id ?? "")/reviews"
+                        showReviewViewSheet.toggle()
+                    } else {
+                        print("😡 Dang! Error saving spot!")
+                    }
+                }
+            }
+        } message: {
+            Text("Would you like to save this location first so that you can enter a review?")
         }
     }
 }
@@ -105,7 +188,7 @@ struct SpotDetailView: View {
 struct SpotDetailView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationStack {
-            SpotDetailView(spot: Spot())
+            SpotDetailView(spot: Spot(), previewRunning: true)
                 .environmentObject(SpotViewModel())
                 .environmentObject(LocationManager())
         }
