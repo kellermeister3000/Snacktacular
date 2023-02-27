@@ -1,5 +1,5 @@
 //
-//  StartSelectionView.swift
+//  StarsSelectionView.swift
 //  Snacktacular
 //
 //  Created by Philip Keller on 2/24/23.
@@ -7,12 +7,13 @@
 
 import SwiftUI
 
-struct StartSelectionView: View {
+struct StarsSelectionView: View {
     @Binding var rating: Int // change this to @Binding after layout is tested
+    @State var interactive = true
     let highestRating = 5
     let unselected = Image(systemName: "star")
     let selected = Image(systemName: "star.fill")
-    let font: Font = .largeTitle
+    var font: Font = .largeTitle
     let fillColor: Color = .red
     let emptyColor: Color = .gray
     
@@ -22,7 +23,9 @@ struct StartSelectionView: View {
                 showStar(for: number)
                     .foregroundColor(number <= rating ? fillColor : emptyColor)
                     .onTapGesture {
-                        rating = number
+                        if interactive {
+                            rating = number
+                        }
                     }
             }
             .font(font)
@@ -40,6 +43,6 @@ struct StartSelectionView: View {
 
 struct StartSelectionView_Previews: PreviewProvider {
     static var previews: some View {
-        StartSelectionView(rating: .constant(4))
+        StarsSelectionView(rating: .constant(4))
     }
 }
