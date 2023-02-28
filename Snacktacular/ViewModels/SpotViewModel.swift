@@ -62,7 +62,7 @@ class SpotViewModel: ObservableObject {
         var imageURLString = "" // We'll set this after the image is successfully saved
         
         do {
-            let _ = try await storageRef.putData(resizedImage, metadata: metadata)
+            let _ = try await storageRef.putDataAsync(resizedImage, metadata: metadata)
             print("📸 Imaged Saved!")
             do {
                 let imageURL = try await storageRef.downloadURL()
