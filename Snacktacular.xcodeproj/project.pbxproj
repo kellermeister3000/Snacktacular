@@ -21,6 +21,7 @@
 		8409A32B29A83C8E00A4DDCA /* SpotDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409A32A29A83C8E00A4DDCA /* SpotDetailView.swift */; };
 		8409A32D29A83F7B00A4DDCA /* SpotViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409A32C29A83F7B00A4DDCA /* SpotViewModel.swift */; };
 		8435E9F129A9DDD400DE6A0B /* ReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8435E9F029A9DDD400DE6A0B /* ReviewViewModel.swift */; };
+		844D5EE829AE8DD500F09B8E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 844D5EE729AE8DD400F09B8E /* Photo.swift */; };
 		8495370F29AC82460027D868 /* SpotReviewRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8495370E29AC82460027D868 /* SpotReviewRowView.swift */; };
 		8497F7AC29A94BDD0094D6E5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8497F7A829A94BDD0094D6E5 /* LocationManager.swift */; };
 		8497F7AD29A94BDD0094D6E5 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8497F7A929A94BDD0094D6E5 /* Place.swift */; };
@@ -44,6 +45,7 @@
 		8409A32A29A83C8E00A4DDCA /* SpotDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotDetailView.swift; sourceTree = "<group>"; };
 		8409A32C29A83F7B00A4DDCA /* SpotViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotViewModel.swift; sourceTree = "<group>"; };
 		8435E9F029A9DDD400DE6A0B /* ReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewModel.swift; sourceTree = "<group>"; };
+		844D5EE729AE8DD400F09B8E /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		8495370E29AC82460027D868 /* SpotReviewRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotReviewRowView.swift; sourceTree = "<group>"; };
 		8497F7A829A94BDD0094D6E5 /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		8497F7A929A94BDD0094D6E5 /* Place.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				8409A32829A83C0500A4DDCA /* Spot.swift */,
 				8497F7B329A979C30094D6E5 /* Review.swift */,
 				8497F7A929A94BDD0094D6E5 /* Place.swift */,
+				844D5EE729AE8DD400F09B8E /* Photo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				844D5EE829AE8DD500F09B8E /* Photo.swift in Sources */,
 				8409A32B29A83C8E00A4DDCA /* SpotDetailView.swift in Sources */,
 				8497F7AE29A94BDD0094D6E5 /* PlaceViewModel.swift in Sources */,
 				8435E9F129A9DDD400DE6A0B /* ReviewViewModel.swift in Sources */,
